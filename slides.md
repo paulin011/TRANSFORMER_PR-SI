@@ -83,33 +83,33 @@ style: |
    - 1.1 Grundidee Embedding Matrix
    - 1.2 Ziel von Embedding
 2. Attention
-   - 2.1 Queries & Keys
+   - 2.1 Queries
+   - 2.2 Keys
+   - 2.3 Values
 3. Attention is all you need
    - 3.1 Multi-Head Attention
-   - 3.2 Funktionsweise MLP
 4. Multi-Layer-Perceptron
+   - 4.1 Funktionsweise MLP
 5. Unembedding & Temperature
 
 ---
 
-Disclaimer
+# ⚠️ Hinweis: Wörter vs. Tokens
 
-Wörter != Tokens
-
-Wörter einfacher für Menschen deswegen hier austauschbar für besseres Verständnis
-
+In der Realität verarbeitet das Modell Tokens, nicht Wörter
+Tokens können Silben, Wörter oder Satzzeichen sein
+Beispiel: „unhappy" → ["un", "happy"]
+In dieser Präsentation wird „Wort" als vereinfachter Begriff verwendet
 ![](https://dataplatform.cloud.ibm.com/docs/api/content/wsj/analyze-data/images/fm-tokenization.png?context=wx&locale=de)
-Quelle: https://dataplatform.cloud.ibm.com/docs/api/content/wsj/analyze-data/images/fm-tokenization.png?context=wx&locale=de
-
 
 ---
 
 
 # Grundidee
-1. Wörter -> Embedding -> Vektor
-2. Gesamten Input verstehen -> Attention
-3. Neues Wort als Vektor Generieren -> Attention
-4. Neues Wort Generieren -> Unembedding
+1. Wörter → Embedding → Vektor (Wort als Zahl darstellen)
+2. Alle Vektoren gleichzeitig verstehen → Attention (Kontext einbetten)
+3. Letzten Vektor durch MLP schicken (Wissen anwenden)
+4. Neuen Vektor → Unembedding → nächstes Wort
 
 
 ---
@@ -149,7 +149,7 @@ section::after { display: none; }
 
 # 1. Embedding
 GPT3 50,257 Einzigartige Tokens
-Tokens representiert als 12.288 Dimensionale Vektoren
+Tokens repräsentiert als 12.288 Dimensionale Vektoren
 
 
 ![height:400](Screenshot_05-Mär_11-48-52_9885.png)
@@ -193,7 +193,7 @@ section::after { display: none; }
 ---
 
 # 1.2 Ziel von Embedding
-Durch Rechnungen Kontext verstehen und enkodieren.
+Durch Rechnungen Kontext verstehen und kodieren.
 
 ---
 
@@ -209,7 +209,7 @@ section::after { display: none; }
 
 # 2 Attention
 Embedding erklärt das Wort aber Kontext fehlt
-Kontext kommt von andern Wörtern
+Kontext kommt von anderen Wörtern
 
 ---
 
@@ -233,7 +233,7 @@ section::after { display: none; }
 
 ---
 
-# 2.1 Wie Effizient Kontext suchen und Einbetten
+# 2.1 Queries
 
 Wichtigkeit von Wörtern für den Kontext ist sehr verschieden
 
@@ -256,9 +256,9 @@ section::after { display: none; }
 
 ---
 
-# Keys
+# 2.2 Keys
 
-Identifikation von attributen (z.b. Adjektiv)
+Identifikation von Attributen (z.b. Adjektiv)
 Token * Key = Ich bin ein Adjektiv
 
 ---
@@ -283,8 +283,22 @@ section::after { display: none; }
 
 ---
 
-# Verbinden von Query und Key
-Skalarprodukt wird gebildet durch softmax gereinigt
+# 2.3 Values
+
+Query & Key bestimmen wie stark zwei Tokens zusammenhängen
+
+Der Value-Vektor bestimmt was dabei übertragen wird
+
+Analogie:
+
+| Rolle	| Frage	| Beispiel |
+|-------|-------|---------|
+Query | 	„Wonach suche ich?"	| Nomen sucht Adjektiv
+Key	| „Was bin ich?"	| Ich bin ein Adjektiv
+Value |	„Was gebe ich weiter?"	| Ich bin blau, groß, kalt…
+
+→ Attention = Query·Key bestimmt Gewichtung, Value wird gewichtet summiert (softmax)
+
 
 ---
 
@@ -363,8 +377,8 @@ section::after { display: none; }
 
 ---
 
-# Multi-Layer-Perceptron
-Attention is wichtig aber nur 1/3 der Größe des Modells.
+# 4 Multi-Layer-Perceptron
+Attention ist wichtig aber nur 1/3 der Größe des Modells.
 
 Die Wissensdatenbank (Multi-Layer-Perceptron) des Modells sind die restlichen 2/3
 
@@ -373,7 +387,7 @@ Input - hidden - output Schichten
 
 Beispiel Michael Jordan plays the sport of ______
 
-Kommt die Ausgabe Basketball (!nicht im vorherigen Kontext)
+Kommt die Ausgabe Basketball (kommt nicht im vorherigen Kontext vor)
 
 ---
 
@@ -387,7 +401,7 @@ section::after { display: none; }
 
 ---
 
-# 3.2 Funktionsweise 
+# 4.1 Funktionsweise MLP
 Jede Zeile fragt im Prinzip eine Frage, z.B.:
 - Ist es auf Englisch?
 - Ist es Source Code?

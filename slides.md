@@ -73,16 +73,22 @@ style: |
 
 
 **Referent:** Paulin Saher
-**Datum:** 31.1.2026
+**Datum:** 10.3.2026
 
 ---
 
-# Inhalt
+# Inhaltsverzeichnis
 
-- Beispiel Gpt3 basierend auf 3Blue1Brown
-- Übersicht 
-
-
+1. Embedding
+   - 1.1 Grundidee Embedding Matrix
+   - 1.2 Ziel von Embedding
+2. Attention
+   - 2.1 Queries & Keys
+3. Attention is all you need
+   - 3.1 Multi-Head Attention
+   - 3.2 Funktionsweise MLP
+4. Multi-Layer-Perceptron
+5. Unembedding & Temperature
 
 ---
 
@@ -335,13 +341,13 @@ section::after { display: none; }
 
 ---
 
-# 3.1 96x Hält besser
-- 96 * Key Matritzen
-96 * Query Matritzen
-96 * Value Matritzen
+# 3.1 Multi-Head Attention
+- 96 × Key-Matrizen
+- 96 × Query-Matrizen
+- 96 × Value-Matrizen
 
-- Alle Jeder Attention Block Gleichzeitig
-Durchschnitt von allen 96 Attention Blocks -> Token Update
+- Alle Attention Heads werden gleichzeitig berechnet
+- Durchschnitt von allen 96 Attention Blocks → Token Update
 
 - Mehrere Interpretationen lernen
 
@@ -365,7 +371,7 @@ Die Wissensdatenbank (Multi-Layer-Perceptron) des Modells sind die restlichen 2/
 Klassisches Neural Network mit
 Input - hidden - output Schichten
 
-Beispiel Michal Jordan plays the sport of ______
+Beispiel Michael Jordan plays the sport of ______
 
 Kommt die Ausgabe Basketball (!nicht im vorherigen Kontext)
 
@@ -381,13 +387,13 @@ section::after { display: none; }
 
 ---
 
-# 3.1 Funktionsweise 
-Jede Zeile Fragt im prinzip eine Frage z.b. 
-- ist es in Englisch
-- ist es source code
-- ist Land in der EU
-- ist ein Basketballer
-- Kodiert der Vektor Michal Jordan?
+# 3.2 Funktionsweise 
+Jede Zeile fragt im Prinzip eine Frage, z.B.:
+- Ist es auf Englisch?
+- Ist es Source Code?
+- Ist es ein Land in der EU?
+- Ist es ein Basketballer?
+- Kodiert der Vektor Michael Jordan?
 
 ---
 
@@ -423,6 +429,14 @@ section::after { display: none; }
 
 ---
 # Unembedding
+
+Vektor zu Token
+
+Temperature bestimmt wie "kreativ" / zufällig sich das Modell verhält
+
+
+Temp = 0: Immer das gleiche Ergebnis
+Temp = 10: Sehr verschieden, aber auch unbrauchbare Ergebnisse
 
 ---
 

@@ -422,6 +422,32 @@ section::after { display: none; }
 ![bg](image-4.png)
 
 ---
+# Unembedding
+
+---
+
+![bg](Screenshot_05-Mär_12-01-32_4100.png)
+
+<style scoped>
+section::before { display: none; }
+footer { display: none; }
+section::after { display: none; }
+</style>
+
+
+---
+
+
+<style scoped>
+section::before { display: none; }
+footer { display: none; }
+section::after { display: none; }
+</style>
+
+
+![bg](Screenshot_05-Mär_12-01-47_8353.png)
+
+---
 # Vielen Dank für Ihre Aufmerksamkeit!
 
 **Noch Fragen oder Anmerkungen?**

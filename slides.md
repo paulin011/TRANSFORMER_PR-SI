@@ -98,7 +98,7 @@ style: |
 
 In der Realität verarbeitet das Modell Tokens, nicht Wörter
 Tokens können Silben, Wörter oder Satzzeichen sein
-Beispiel: „unhappy" → ["un", "happy"]
+Beispiel: „unhappy" -> ["un", "happy"]
 In dieser Präsentation wird „Wort" als vereinfachter Begriff verwendet
 ![](https://dataplatform.cloud.ibm.com/docs/api/content/wsj/analyze-data/images/fm-tokenization.png?context=wx&locale=de)
 
@@ -461,7 +461,6 @@ section::before { display: none; }
 footer { display: none; }
 section::after { display: none; }
 </style>
-
 
 ---
 
